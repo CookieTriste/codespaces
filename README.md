@@ -179,6 +179,113 @@ const projectList = [
 ];
 ```
 
+### 4️⃣ Add a login system
+
+To add a login system to your portfolio site, follow these steps:
+
+1. Create a new React component for the login form in `src/Components/Login.jsx`:
+   ```javascript
+   import React, { useState } from 'react';
+
+   const Login = () => {
+     const [username, setUsername] = useState('');
+     const [password, setPassword] = useState('');
+
+     const handleSubmit = (event) => {
+       event.preventDefault();
+       // Handle login logic here
+       console.log('Username:', username);
+       console.log('Password:', password);
+     };
+
+     return (
+       <div>
+         <h2>Login</h2>
+         <form onSubmit={handleSubmit}>
+           <div>
+             <label htmlFor="username">Username:</label>
+             <input
+               type="text"
+               id="username"
+               value={username}
+               onChange={(e) => setUsername(e.target.value)}
+             />
+           </div>
+           <div>
+             <label htmlFor="password">Password:</label>
+             <input
+               type="password"
+               id="password"
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+             />
+           </div>
+           <button type="submit">Login</button>
+         </form>
+       </div>
+     );
+   };
+
+   export default Login;
+   ```
+
+2. Import the new `Login` component and add a route for the login page in `src/App.jsx`:
+   ```javascript
+   import Login from "./Components/Login";
+
+   const App = () => {
+     return (
+       <Router>
+         <div id="main">
+           <Header />
+           <Switch>
+             <Route exact path="/">
+               <Home name={siteProps.name} title={siteProps.title} />
+               <About />
+               <Portfolio />
+             </Route>
+             <Route path="/login">
+               <Login />
+             </Route>
+           </Switch>
+           <Footer {...siteProps} primaryColor={primaryColor} secondaryColor={secondaryColor} />
+         </div>
+       </Router>
+     );
+   };
+
+   export default App;
+   ```
+
+3. Add a link to the login page in the navigation bar in `src/Components/Header.jsx`:
+   ```javascript
+   const Header = () => {
+     return (
+       <div
+         style={{
+           position: "fixed",
+           display: "flex",
+           justifyContent: "center",
+           gap: "2rem",
+           background: "rgba(255,255,255,0.75)",
+           padding: "1rem",
+           top: 0,
+           width: "100%",
+           zIndex: 10,
+         }}
+       >
+         <a href="#home">Home</a>
+         <a href="#about">About</a>
+         <a href="#portfolio">Portfolio</a>
+         <a href="#footer">Contact</a>
+         <a href="/login">Login</a>
+       </div>
+     );
+   };
+
+   export default Header;
+   ```
+
 <br/>
 
 ## 🏃 Deploy your web application
